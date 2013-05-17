@@ -60,13 +60,20 @@ public class MonthView extends LinearLayout {
         for (int c = 0; c < week.size(); c++) {
           MonthCellDescriptor cell = week.get(c);
           CheckedTextView cellView = (CheckedTextView) weekRow.getChildAt(c);
-          cellView.setText(Integer.toString(cell.getValue()));
+          // cellView.setText(Integer.toString(cell.getValue()));
           cellView.setEnabled(cell.isCurrentMonth());
           cellView.setChecked(!cell.isToday());
           cellView.setSelected(cell.isSelected());
           if (cell.isSelectable()) {
+            if (cell.isAvailable()) {
+              cellView.setBackgroundResource(R.color.calendar_available_bg_selector);
+            } else {
+              cellView.setBackgroundResource(R.color.calendar_unavailable_bg_selector);
+            }
+            cellView.setText(Integer.toString(cell.getValue()) + "\n" + cell.getAvailableText());
             cellView.setTextColor(getResources().getColorStateList(R.color.calendar_text_selector));
           } else {
+            cellView.setText(Integer.toString(cell.getValue()));
             cellView.setTextColor(getResources().getColor(R.color.calendar_text_unselectable));
           }
           cellView.setTag(cell);

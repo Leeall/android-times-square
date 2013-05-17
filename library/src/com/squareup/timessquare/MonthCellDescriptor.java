@@ -11,15 +11,19 @@ class MonthCellDescriptor {
   private boolean isSelected;
   private final boolean isToday;
   private final boolean isSelectable;
+  private boolean available;
+  private String availableText;
 
   MonthCellDescriptor(Date date, boolean currentMonth, boolean selectable, boolean selected,
-      boolean today, int value) {
+      boolean today, int value, boolean available, String availableText) {
     this.date = date;
     isCurrentMonth = currentMonth;
     isSelectable = selectable;
     isSelected = selected;
     isToday = today;
     this.value = value;
+    this.available = available;
+    this.availableText = availableText;
   }
 
   public Date getDate() {
@@ -46,7 +50,23 @@ class MonthCellDescriptor {
     return isToday;
   }
 
-  public int getValue() {
+  public boolean isAvailable() {
+    return available;
+  }
+
+  public void setAvailable(boolean available) {
+    this.available = available;
+  }
+
+public String getAvailableText() {
+    return availableText;
+}
+
+public void setAvailableText(String availableText) {
+    this.availableText = availableText;
+}
+
+public int getValue() {
     return value;
   }
 
